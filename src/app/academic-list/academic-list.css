@@ -30,7 +30,7 @@
 }
 .table-div{
     width: 100%;
-    height: auto;
+    min-height: 200px;
     overflow: hidden;
     overflow-y: scroll;
 }
@@ -178,6 +178,9 @@ table tbody td{
 .dropdown button{
     border: none;
     background-color: transparent;
+}
+.dropdown-menu{
+    z-index: 1050;
 }
 .dropdown-menu li a{
     font-size: 12px;

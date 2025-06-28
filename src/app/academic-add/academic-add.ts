@@ -1,10 +1,9 @@
-import { Component,signal,OnInit } from '@angular/core';
+import { Component,signal,OnInit  } from '@angular/core';
 import { RouterLink,Router } from '@angular/router';
 import { Api } from '../api';
 import { CommonModule } from '@angular/common'; 
 import { Student,AcademicExamMark,AcademicExamStudent } from '../model/student';
 import { FormsModule,NgForm } from '@angular/forms';
-import { ɵconvertToBitFlags } from '../../../node_modules/@angular/core/index';
 
 @Component({
   selector: 'app-academic-add',
@@ -12,7 +11,7 @@ import { ɵconvertToBitFlags } from '../../../node_modules/@angular/core/index';
   templateUrl: './academic-add.html',
   styleUrl: './academic-add.css'
 })
-export class AcademicAdd implements OnInit{
+export class AcademicAdd implements OnInit {
   student:Student = {
     exam_name: '',
     class_id: '',
@@ -21,9 +20,19 @@ export class AcademicAdd implements OnInit{
     exam_end_date: '',
     exam:[]
   };
+  studentExam: AcademicExamStudent = {
+    student_id: 0,
+    total_mark: '',
+    total_mark_scored: '',
+    status:'',
+    subject_mark: []
+  };
+  subjectMark: AcademicExamMark[] = [];
+  
   total_mark: any;
   total_mark_scored: any;
   status:any;
+  selectedStudentSubjectMarks: any[] = [];
 
   constructor(private api:Api, private router:Router){}
   isModelOpen = signal(false);
@@ -37,16 +46,6 @@ export class AcademicAdd implements OnInit{
   student_name:any='';
   student_id:any='';
 
-  // model code
-  openModel(academic_student_id:any, academic_student_name:any){
-    this.isModelOpen.set(true);
-    this.student_name = academic_student_name;
-    this.student_id = academic_student_id;
-    console.log('open model'+this.isModelOpen);
-  }
-  closeModel(){
-    this.isModelOpen.set(false);
-  }
   saveMark(studnet_id:any){
     let total_mark:any = document.getElementById('total_subject_mark_'+studnet_id);
     let total_mark_scored:any = document.getElementById('total_subject_scored_mark_'+studnet_id);
@@ -71,7 +70,7 @@ export class AcademicAdd implements OnInit{
       });
     });
 
-    const studentExam: AcademicExamStudent = {
+    const studentExam = this.studentExam = {
       student_id: this.student_id,
       total_mark: this.total_mark,
       total_mark_scored: this.total_mark_scored,
@@ -79,7 +78,6 @@ export class AcademicAdd implements OnInit{
       subject_mark: subjectMark
     };
 
-    
     const studentIndex = this.student.exam.findIndex((x) => x.student_id === this.student_id);
     if (studentIndex !== -1) {
       this.student.exam[studentIndex] = studentExam;
@@ -94,9 +92,40 @@ export class AcademicAdd implements OnInit{
       this.getStudentList[tableIndex].status = this.status;
     }    
 
-    this.closeModel()
+    const inputsToReset = document.querySelectorAll('.rest-input');
+
+    inputsToReset.forEach((input:any) => {
+        if (input.type === 'text' ||  input.tagName === 'TEXTAREA') {
+            input.value = '';
+        }    
+    });
+    this.closeModel();
   }
 
+  subjet_mark_list:any = [];
+    // model code
+  openModel(academic_student_id:any, academic_student_name:any){
+    this.isModelOpen.set(true);
+    this.student_name = academic_student_name;
+    this.student_id = academic_student_id;
+    const studentExamData = this.student.exam.find(exam => exam.student_id === this.student_id);
+    if (studentExamData) {
+      this.subjet_mark_list = JSON.parse(JSON.stringify(studentExamData.subject_mark));
+      this.status = studentExamData.status;
+      this.total_mark = studentExamData.total_mark;
+      this.total_mark_scored = studentExamData.total_mark_scored;
+    } else {
+      this.subjet_mark_list = []; 
+      this.status = '';
+      this.total_mark = '';
+      this.total_mark_scored = '';
+    }
+    // console.log(this.subjet_mark_list);
+  }
+  closeModel(){
+    this.isModelOpen.set(false);
+    this.subjet_mark_list = []; 
+  }
   markCalculation(student_id:any){
     let total_mark:number = 0 ,scored_mark:number = 0;
     for(var i = 0 ; i < 5; i++){

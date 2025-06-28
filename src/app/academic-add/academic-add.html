@@ -132,17 +132,17 @@
                         </div>
                         <div class="col-lg-3 model-input">
                             <div >
-                                <input type="text" class="form-control" name="total_mark" placeholder="Total mark" id="total_mark_{{ student_id }}_{{ i }}" name="mark_detail[{{ i }}][total_mark]" (change)="markCalculation(student_id)">
+                                <input type="text" class="form-control rest-input" name="total_mark" placeholder="Total mark" id="total_mark_{{ student_id }}_{{ i }}" name="mark_detail[{{ i }}][total_mark]" (change)="markCalculation(student_id)" value="{{ subjet_mark_list[i]?.total_mark }}">
                             </div>
                         </div>
                         <div class="col-lg-3 model-input">
                             <div class="model-input">
-                                <input type="text" class="form-control" name="scored_mark" placeholder="Scored mark" id="scored_mark_{{ student_id }}_{{ i }}" name="mark_detail[{{ i }}][scored_mark]" (change)="markCalculation(student_id)">
+                                <input type="text" class="form-control rest-input" name="scored_mark" placeholder="Scored mark" id="scored_mark_{{ student_id }}_{{ i }}" name="mark_detail[{{ i }}][scored_mark]" (change)="markCalculation(student_id)" value="{{ subjet_mark_list[i]?.mark_scored }}">
                             </div>
                         </div>
                         <div class="col-lg-3 mt-3 model-textarea">
                             <div>
-                                <textarea placeholder="comments" name="comments" class="form-control" id="comments_{{ student_id }}_{{ i }}" name="mark_detail[{{ i }}][comments]"></textarea>
+                                <textarea placeholder="comments" name="comments" class="form-control rest-input" id="comments_{{ student_id }}_{{ i }}" name="mark_detail[{{ i }}][comments]" [textContent]="subjet_mark_list[i]?.comments"></textarea>
                             </div>
                         </div>
                     </div>
@@ -166,18 +166,27 @@
                 <div class="d-flex flex-row-reverse">
                     <div class="p-2">
                         <label for="total_subject_scored_mark">Scored mark</label>
-                        <input type="text" id="total_subject_scored_mark_{{ student_id }}" class="form-control" name="total_subject_scored_mark" value="0">
+                        <input type="text" id="total_subject_scored_mark_{{ student_id }}" class="form-control rest-input" name="total_subject_scored_mark" value="{{ total_mark_scored }}">
                     </div>
                     <div class="p-2">
                         <label for="total_subject_mark">Total mark</label>
-                        <input type="text" id="total_subject_mark_{{ student_id }}" class="form-control" name="total_subject_mark" value="0">
+                        <input type="text" id="total_subject_mark_{{ student_id }}" class="form-control rest-input" name="total_subject_mark" value="{{ total_mark }}">
                     </div>
                     <div class="p-2">
                         <label for="total_subject_mark">Status <span class="star"> *</span></label>
-                        <select class="form-select" id="status_{{ student_id }}" aria-label="Default select example" name="status">
+                        <select class="form-select rest-input" id="status_{{ student_id }}" aria-label="Default select example" name="status">
                             <option selected>Select status</option>
-                            <option value="pass">Pass</option>
-                            <option value="fail">Fail</option>
+                            @if(status == 'pass'){
+                                <option value="pass" selected>Pass</option>
+                                <option value="fail">Fail</option>
+                            }
+                            @else if(status == 'fail'){
+                                <option value="pass">Pass</option>
+                                <option value="fail" selected>Fail</option>
+                            }@else{
+                                <option value="pass">Pass</option>
+                                <option value="fail">Fail</option>
+                            }
                         </select>
                     </div>
                 </div>

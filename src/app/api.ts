@@ -44,4 +44,7 @@ export class Api {
   addAcademicExam(academicExam:any){
     return this.http.post(environment.apiDomain+'/api/v1/student/academic-exam/save',academicExam);
   }
+  updateAcademicExam(academicExam:any,id:any){
+    return this.http.post(environment.apiDomain+'/api/v1/student/academic-exam/update/'+id,academicExam);
+  }
 }
