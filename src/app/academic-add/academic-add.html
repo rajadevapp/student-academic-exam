@@ -1,0 +1,200 @@
+<div>
+    <div class="list-heading mt-3">
+        <div>
+            <p>Home / <span>Academic exam</span> / <span> Academic exam add</span></p>
+            <h2>Add new Academic exam</h2>
+        </div>
+        <div class="back-btn-div">
+            <a routerLink="/student/academic-exam" class="btn btn-back">Back</a>
+        </div>
+    </div>
+    <div class="card">
+        <form autocomplete="off" #studentForm="ngForm" (ngSubmit)="onSubmit(studentForm)">
+            <div class="row">
+            <div class="col-lg-6 col-sm-12 form-input">
+                <label>Exam name <span class="star">*</span></label>
+                <div class="input-box">
+                    <input type="text" name="exam_name" id="exam_name" [(ngModel)]="student.exam_name" #exam_name="ngModel" class="form-control" placeholder="Enter exam name" required >
+                </div>
+                <div *ngIf="exam_name.invalid && (exam_name.dirty || exam_name.touched)" class="error-message">
+                    <div *ngIf="exam_name.errors?.['required']">
+                      Exam is required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 form-input">
+                <label>Class <span class="star">*</span></label>
+                <div class="input-box">
+                    <select  name="class_id" id="class_id" class="form-control"  [(ngModel)]="student.class_id" #class_id="ngModel" (ngModelChange)="classStudentChange()" required>
+                        <option value="">Select class</option>
+                        <option *ngFor="let value of classList;" value="{{ value.id }}">{{ value.class_name }}</option>
+                    </select>
+                </div>
+                <div>
+                    <div *ngIf="class_id.invalid && (class_id.dirty || class_id.touched)" class="error-message">
+                        <div *ngIf="class_id.errors?.['required']">
+                          Class is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 form-input">
+                <label>Section <span class="star">*</span></label>
+                <div class="input-box">
+                    <select  name="section_id" id="section_id" class="form-control" [(ngModel)]="student.section_id" #section_id="ngModel" (ngModelChange)="classStudentChange()" required>
+                        <option value="">Select section</option>
+                        <option *ngFor="let value of sectionList;" value="{{ value.id }}">{{ value.section_name }}</option>
+                    </select>
+                </div>
+                <div>
+                    <div *ngIf="section_id.invalid && (section_id.dirty || section_id.touched)" class="error-message">
+                        <div *ngIf="section_id.errors?.['required']">
+                          Section is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 form-input">
+                <label>Exam start date <span class="star">*</span></label>
+                <div class="input-box">
+                    <input type="date" name="exam_start_date" id="exam_start_date" [(ngModel)]="student.exam_start_date" #exam_start_date="ngModel" class="form-control" required>
+                </div>
+                <div *ngIf="exam_start_date.invalid && (exam_start_date.dirty || exam_start_date.touched)" class="error-message">
+                    <div *ngIf="exam_start_date.errors?.['required']">
+                        Exam start date is required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 form-input">
+                <label>Exam end date <span class="star">*</span></label>
+                <div class="input-box">
+                    <input type="date" name="exam_end_date" id="exam_end_date" [(ngModel)]="student.exam_end_date" #exam_end_date="ngModel" class="form-control" required [min]="student.exam_start_date">
+                </div>
+                <div *ngIf="exam_end_date.invalid && (exam_end_date.dirty || exam_end_date.touched)" class="error-message">
+                    <div *ngIf="exam_end_date.errors?.['required']">
+                        Exam end date is required.
+                        <span *ngIf="exam_end_date.errors?.['min']">End Date must be on or after Start Date.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-div mt-2" [style] = "{display:isStudentTable() ? 'block' : 'none'}">
+            <table>
+                <thead>
+                    <tr> 
+                        <th>S.no</th>
+                        <th>Student name</th>
+                        <th>Total mark</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(getStudentList.length == 0){
+                        <tr>
+                            <td colspan="20"> No result found</td>
+                        </tr>
+                    }
+                    @else{
+                        <tr *ngFor="let value of getStudentList; let i = index;">
+                            <td>{{ i+1 }}</td>
+                            <td>{{ value.first_name }}</td>
+                            <td>{{ value?.total_mark_scored }} / {{ value?.total_mark }}</td>
+                            <td>{{ value?.status }}</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-success my-2" (click)="openModel(value.id,value.first_name)">
+                                    <i class="bi bi-plus-circle"></i> Add Subject
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- Modal -->
+<div class="modal" [style] = "{display:isModelOpen() ? 'block' : 'none'}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add subject and mark ({{ student_name }})</h5>
+          <button type="button" class="close" (click)="closeModel()" aria-label="Close" [style]="{border:'none', background:'none'}">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+                <div class="model-form" *ngFor="let item of subjectList;let i=index;">
+                    <div class="form-input-group">
+                        <div class="col-lg-3 model-input">
+                            <div>
+                                <input type="text" value="{{ item.subject_name }}" class="form-control" id="subject_name_{{ student_id }}_{{ i }}" name="mark_detail[{{ i }}][subject_name]" placeholder="Subject" readonly>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 model-input">
+                            <div >
+                                <input type="text" class="form-control" name="total_mark" placeholder="Total mark" id="total_mark_{{ student_id }}_{{ i }}" name="mark_detail[{{ i }}][total_mark]" (change)="markCalculation(student_id)">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 model-input">
+                            <div class="model-input">
+                                <input type="text" class="form-control" name="scored_mark" placeholder="Scored mark" id="scored_mark_{{ student_id }}_{{ i }}" name="mark_detail[{{ i }}][scored_mark]" (change)="markCalculation(student_id)">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 mt-3 model-textarea">
+                            <div>
+                                <textarea placeholder="comments" name="comments" class="form-control" id="comments_{{ student_id }}_{{ i }}" name="mark_detail[{{ i }}][comments]"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="form-input-btn">
+                        <div class="d-flex flex-row-reverse">
+                            <div class="p-1">
+                                <button class="delete-btn">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                            <div class="p-1">
+                                <button class="add-new-btn">
+                                    <i class="bi bi-plus"></i><span> Add Subjet</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+          </div>
+          <div class="row">
+                <div class="d-flex flex-row-reverse">
+                    <div class="p-2">
+                        <label for="total_subject_scored_mark">Scored mark</label>
+                        <input type="text" id="total_subject_scored_mark_{{ student_id }}" class="form-control" name="total_subject_scored_mark" value="0">
+                    </div>
+                    <div class="p-2">
+                        <label for="total_subject_mark">Total mark</label>
+                        <input type="text" id="total_subject_mark_{{ student_id }}" class="form-control" name="total_subject_mark" value="0">
+                    </div>
+                    <div class="p-2">
+                        <label for="total_subject_mark">Status <span class="star"> *</span></label>
+                        <select class="form-select" id="status_{{ student_id }}" aria-label="Default select example" name="status">
+                            <option selected>Select status</option>
+                            <option value="pass">Pass</option>
+                            <option value="fail">Fail</option>
+                        </select>
+                    </div>
+                </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-submit mb-4" (click)="saveMark(student_id)">Save Subject</button>
+        </div>
+      </div>
+    </div>
+</div>
+        <div class="row my-2">
+            <div class="submit-div">
+                <button type="reset" class="btn btn-rest" id="reset"><span>Reset</span></button>
+                <button type="submit" class="btn btn-submit" id="class_submit" [disabled]="studentForm.invalid"><span>Submit</span></button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>

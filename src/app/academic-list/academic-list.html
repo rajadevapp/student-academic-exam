@@ -1,0 +1,92 @@
+<!-- <p>academic-list works!</p>
+
+@if(studentList.length > 0){
+    <ul>
+        <li *ngFor="let value of studentList">{{value.first_name}}</li>
+    </ul>
+}
+@else{
+    <h5>Error</h5>
+    <p>{{ errorMsg }}</p>
+}
+ -->
+
+<div>
+    <div class="list-heading mt-3">
+        <div>
+            <p>Home / <span>Academic exam list</span></p>
+            <h2>Academic exam list</h2>
+        </div>
+    </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" [style] = "{display:isModelOpen() ? 'block' : 'none'}">
+        <strong></strong>{{ deleteMessage }}
+        <button type="button" class="close float-end" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true" (click)="closeModel()">&times;</span>
+        </button>
+    </div>
+    <div class="card">
+        <div class="filter-div">
+            <div class="search-filter">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" placeholder="Search exam name" name="search" id="search" [(ngModel)]="search" (ngModelChange)="filterChange()">
+            </div>
+            <div class="filter">
+                <!-- <div class="filter-option">
+                    <p>Filter <span><i class="bi bi-caret-down-fill"></i></span></p>
+                </div> -->
+                <a routerLink="/student/academic-exam/add" class="add-new-btn">
+                    <i class="bi bi-plus"></i><span> Add exam</span>
+                </a>
+            </div>
+        </div>
+        <div class="table-div mt-2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.no</th>
+                        <th>Exam name</th>
+                        <th>Class</th>
+                        <th>Section</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let value of studentList; let i = index;">
+                        <td>{{ i+1 }}</td>
+                        <td>{{value.exam_name}}</td>
+                        <td>{{value.class_name}}</td>
+                        <td>{{value.section_name}}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" routerLink="/student/academic-exam/view/{{value.id}}">View</a></li>
+                                  <li><a class="dropdown-item" routerLink="/student/academic-exam/edit/{{value.id}}">Edit</a></li>
+                                  <li><a class="dropdown-item" (click)="deleteAcademicExam(value.id)">Delete</a></li>
+                                </ul>
+                              </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-div">
+            <div class="limit">
+                <div class="limit-txt">Row per page</div>
+                <div class="dropdown-container">
+                    <select id="limit" name="limit" [(ngModel)]="limit" (ngModelChange)="filterChange()">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                    <span class="arrow">&#9662;</span> 
+                </div>
+            </div>
+            <div class="pagination">
+
+            </div>
+        </div>
+    </div>
+</div>

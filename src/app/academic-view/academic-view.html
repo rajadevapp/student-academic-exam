@@ -1,0 +1,80 @@
+<div>
+    <div class="list-heading mt-3">
+        <div>
+            <p>Home / <span>Acadmic exam</span> / <span> Academic exam view</span></p>
+            <h2>View class #{{ id }}</h2>
+        </div>
+        <div class="back-btn-div">
+            <a routerLink="/student/academic-exam" class="btn btn-back">Back</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="row view-box">
+            <div class="col-lg-4 col-sm-12 view-input">
+                <p>Exam name</p>
+                <div class="view-value">
+                    <p>{{ studentData.exam_name }}</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-12 view-input">
+                <p>Class name</p>
+                <div class="view-value">
+                    <p>{{ studentData.class_name }}</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-12 view-input">
+                <p>Section name</p>
+                <div class="view-value">
+                    <p>{{ studentData.section_name }}</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-12 view-input">
+                <p>Exam start date</p>
+                <div class="view-value">
+                    <p>{{ studentData.exam_start_date }}</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-12 view-input">
+                <p>Exam end date</p>
+                <div class="view-value">
+                    <p>{{ studentData.exam_end_date }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row view-box">
+            <div class="table-div mt-2">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S.no</th>
+                            <th>Student name</th>
+                            <th *ngFor="let item of studentData.subject_list;">
+                                {{ item.subject_name }}
+                            </th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th *ngFor="let item of studentData.subject_list;">
+                                {{ item.total_mark }}
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of studentData.student_detail; let i = index;">
+                            <td>{{ i+1 }}</td>
+                            <td>{{ item.first_name }}</td>
+                            <td *ngFor="let value of item.mark_details;">{{ value.mark_scored }}</td>
+                            <td>{{ item.total_mark_scored }}/{{ item.total_mark }}</td>
+                            <td>{{ item.status }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

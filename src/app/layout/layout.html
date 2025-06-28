@@ -1,0 +1,40 @@
+<div class="d-flex full-box">
+    <aside id="side-bar">
+        <div class="sidebar-logo">
+            <a href="#">Education</a>
+        </div>
+        <ul class="sidebar-nav p-0">
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a routerLink="student/academic-exam" class="sidebar-link">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Academic exam</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+    <nav id="nav">
+        <div class="expand-icon">
+            <i class="bi bi-justify-left"></i>
+        </div>
+        <div class="right-info">
+            <div class="notification">
+                <i class="bi bi-bell"></i>
+            </div>
+            <div class="profile">
+                <div class="profile-image">
+                    
+                </div>
+                <p>Raju</p>
+            </div>
+        </div>
+    </nav>
+    <main id="main">
+        <ng-content></ng-content>
+    </main>
+</div>

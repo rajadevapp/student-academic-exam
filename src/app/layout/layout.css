@@ -1,0 +1,217 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: padding-box;
+    font-family: 'Public Sans';
+}
+.first-primary{
+    color: #0d6efd;
+}
+li{
+    list-style: none;
+}
+.i-size{
+    font-size: 8px;
+}
+#side-bar a{
+    text-decoration: none;
+}
+.full-box{
+    height: 100dvh;
+    background-color: #FAFAFB;
+    width: 100%;
+}
+#side-bar{
+    max-width: 277px;
+    min-width: 277px;
+    height: 100dvh;
+    transition: all 0.3s ease-in-out;
+    background-color: #fff;
+    color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+}
+#side-bar .collapsed{
+    width: -277px;
+}
+.sidebar-nav{
+    flex: 1 1 auto;
+}
+.sidebar-logo{
+    padding: 20px 25px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.sidebar-item a{
+    color: #000;
+}
+.sidebar-logo a{
+    color: #000;
+    font-weight: 500;
+    font-size: 20px;
+}
+a.sidebar-link{
+    position: relative;
+    padding: 10px 20px;
+    font-weight: 400;
+    transition: all 0.35s;
+    display: block;
+    cursor: pointer;
+}
+.sidebar-link span{
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+.sidebar-link[data-bs-toggle='collapse']::after{
+    content: '';
+    position: absolute;
+    right: 5px;
+    top:20px;
+    border: solid;
+    border-width: 0px 2px 2px 0px;
+    padding: 2px;
+    transform: rotate(-135deg);
+    transition: all 0.35s ease-out;
+}
+.sidebar-link[data-bs-toggle='collapse'].collapsed::after{
+    transform: rotate(45deg);
+    transition:  all 0.35s ease-out;
+}
+#master li{
+    font-size: 15px;
+    font-weight: 300;
+}
+
+#master .sidebar-link i{
+    position: relative;
+    top: -1px;
+    display: inline-block;
+    padding: 2px 2px 5px 5px;
+}
+.active{
+    background-color: #318eff10;
+    color: #0d6efd;
+    position: relative;
+}
+#nav{
+    position: sticky;
+    top: 0px;
+    margin-left: 277px;
+    width: 100%;
+    padding: 20px 20px;
+    display: flex;
+    justify-content:space-between;
+    flex-direction: row;
+    overflow: hidden;
+    background-color: #fff;
+    height: 55px;
+    z-index: 1;
+}
+.right-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.right-info .notification{
+    margin-right: 5px;
+}
+.expand-icon,.right-info .notification i{
+    font-size: 20px;
+    font-weight: 600;
+}
+.right-info .profile{
+    margin: 5px 10px 5px 0px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+.right-info .profile .profile-image{
+    width: 50px;
+    height: 50px;
+    padding: 10px 10px;
+}
+.right-info .profile .profile-image img{
+    width: 100%;
+    border-radius: 50%;
+}
+.right-info .profile p{
+    font-weight: 400;
+    font-size: 14px;
+    margin: 5px 10px 5px 0px;
+}
+#main{
+    position: absolute;
+    margin-left: 277px;
+    top: 72px;
+    overflow: hidden;
+    width: 80%;
+}
+.card form .input-box, .form-input{
+    padding: 5px 0px;
+}
+.card form .input-box input{
+    width: 500px;
+    height: 35px;
+    border: none;
+    border:1px solid #E6EBF1;
+    font-size: 14px;
+    font-weight: 300;
+    color: #82809A;
+}
+.card form .input-box textarea{
+    width: 500px;
+    height: 110px;
+    border: none;
+    border:1px solid #E6EBF1;
+    color: #82809A;
+}
+.card form .submit-div{
+    width: 100%;
+    position: relative;
+    left: 890px;
+}
+.card form .submit-div .btn-rest{
+    width: 90px;
+    height: 40px;
+    border: 1px solid #A7A7A7;
+    border-radius: 8px;
+    color: #000;   
+    text-align: center;
+    padding-bottom: 5px; 
+}
+.card form .submit-div .btn-submit{
+    width: 90px;
+    height: 40px;
+    margin-left: 5px;
+    border: none;
+    background-color: #318FFF;
+    border: 1px solid #A7A7A7;
+    border-radius: 8px;
+    color: #fff;   
+    text-align: center;
+    padding-bottom: 5px; 
+    font-weight: 600;
+}
+
+@media screen and (max-width: 576px) {
+    #side-bar{
+        display: none;
+    }
+    #nav,#main{
+        margin-left:0px
+    }
+    #nav .right-info{
+        margin-right: 20px;
+    }
+    .list-heading {
+        padding: 10px 30px;
+    }
+    .list-heading p{
+        font-size: 12px;
+    }
+    .list-heading h2{
+        font-size: 15px;
+    }
+}

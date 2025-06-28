@@ -1,0 +1,253 @@
+
+.star{
+    color: red;
+}
+.card{
+    width: 1150px;
+    margin: 10px 10px 10px 15px;
+    border: 1px solid #E6EBF1;
+    padding: 5px 5px 5px 10px;
+}
+.card form,.card .view-box{
+    margin: 20px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 300;
+}
+.card form .input-box, .form-input{
+    padding: 5px 0px;
+}
+.card form .input-box input,select{
+    width: 500px;
+    height: 35px;
+    border: none;
+    border:1px solid #E6EBF1;
+    font-size: 14px;
+    font-weight: 300;
+    color: #82809A;
+}
+.card form .input-box textarea{
+    width: 500px;
+    height: 110px;
+    border: none;
+    border:1px solid #E6EBF1;
+    color: #82809A;
+}
+.card form .submit-div{
+    width: 100%;
+    position: relative;
+    left: 890px;
+}
+.card form .submit-div .btn-rest{
+    width: 90px;
+    height: 35px;
+    border:none;
+    border: 1px solid #A7A7A7;
+    border-radius: 5px;
+    color: #000;   
+    text-align: center;
+    font-size: 15px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+}
+.btn-submit{
+    width: 90px;
+    height: 35px;
+    margin-left: 5px;
+    border: none;
+    background-color: #318FFF;
+    border: 1px solid #A7A7A7;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #fff;   
+    text-align: center;
+    font-weight: 600;
+    padding-bottom: 20px;
+    margin-top: 20px;
+}
+.btn-submit span{
+    position: relative;
+    top: 0;
+}
+.card .view-box .view-input {
+    margin-top: 2px;
+}
+.card .view-box .view-input p{
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+.card .view-box .view-value{
+    width: 100%;
+}
+.card .view-box .view-value p{
+    font-weight: 400;
+    font-size: 13px;
+}
+.list-heading{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    padding: 10px 3px 10px 20px;
+}
+.list-heading p{
+    font-weight: 500;
+    font-size: 14px;
+    padding: 0px 0px;
+    line-height: 5px;
+    margin-bottom: 5px;
+    color: #8C8C9D;
+}
+.list-heading .back-btn-div{
+    position: relative;
+}
+.list-heading .back-btn-div button{
+    border: none;
+    width: 83px;
+    height: 30px;
+    padding: 2px 6px;
+    font-weight: 500;
+    font-size: 15px;
+    background-color: #0d6efd;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 3px;
+}
+.list-heading span{
+    color: #262626;
+}
+.list-heading h2{
+    font-weight: 500;
+    font-size: 20px;
+}
+.table-div{
+    width: 1100px;
+    height: auto;
+    margin-left: 0px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #0d6efd;
+    border-radius: 10px;
+}
+table thead{
+    width: 100%;
+    height: 60px;
+    background-color: #E6EBF1;
+}
+table thead th{
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 2px 2px;
+    text-align: center;
+}
+table,tbody{
+    width: 100%;
+}
+table tbody td{
+    font-weight: 300;
+    font-size: 12px;
+    height: 46px;
+    padding: 2px 2px;
+    text-align: center;
+    border-bottom: 1px solid #E6EBF1;
+}
+.delete-btn{
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 2px;
+    background-color: rgba(239, 30, 7, 0.368);
+    color: #fd450df4;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 5px;
+}
+.add-new-btn{
+    width: 113px;
+    height: 30px;
+    border: none;
+    border-radius: 2px;
+    background-color: #0d6efd;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 5px;
+}
+.add-new-btn span{
+    font-weight: 600;
+    font-size: 10px;
+}   
+.modal{
+    width: 100%;
+    margin-top: 50px;
+}
+.modal-dialog{
+    width: 100%;
+}
+.modal-content{
+    width: 800px;
+}
+.model-form{
+    position: relative;
+    width: 95%;
+    margin: 15px 10px 10px 30px;
+    border: .5px solid #e8e2e2;
+}
+.model-sizing{
+    margin-right: 10px;
+}
+.model-input{
+    width: 200px;
+    margin-top: 10px;
+    margin-right: 20px;
+    display: inline-block;
+}
+.model-input input{
+    width: 100%;
+    height: 40px;
+}
+.model-input select option{
+    font-size: 15px;
+    font-weight: 400;
+}
+.model-textarea{
+    width: 350px;
+    height: 80px;
+}
+.model-textarea textarea{
+    width: 100%;
+    height: 100%;
+}
+.close{
+    font-size: 25px;
+}
+
+.btn-back{
+    width: 90px;
+    height: 35px;
+    border:none;
+    border: 1px solid #A7A7A7;
+    border-radius: 5px;
+    color: #000;   
+    text-align: center;
+    font-size: 15px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+}
+.error-message{
+    color: red;
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: 2px;
+}
